@@ -1,0 +1,22 @@
+-- Joins
+-- Inner Join
+SELECT Worker.FirstName , Bonus.BonusAmount FROM Bonus INNER JOIN Worker ON Bonus.Worker_ref_id=Worker.WorkerId; 
+
+-- Outer Join
+-- Left Join
+SELECT Worker.FirstName , Bonus.BonusAmount from Worker LEFT JOIN Bonus ON Bonus.Worker_ref_id=Worker.WorkerId;
+
+-- Right Join
+SELECT Worker.FirstName , Bonus.BonusAmount from Worker RIGHT JOIN Bonus ON Bonus.Worker_ref_id=Worker.WorkerId;
+
+-- When there are more than 2 tables
+ SELECT Worker.FirstName , Bonus.BonusAmount , Title.WorkTitle from bonus RIGHT JOIN worker ON Bonus.Worker_ref_id=Worker.WorkerId RIGHT JOIN Title ON Worker.WorkerId=Title.Worker_ref_id;
+
+-- full join
+SELECT Worker.FirstName , Bonus.BonusAmount from Worker LEFT JOIN Bonus ON Bonus.Worker_ref_id=Worker.WorkerId UNION SELECT Worker.FirstName , Bonus.BonusAmount from Worker RIGHT JOIN Bonus ON Bonus.Worker_ref_id=Worker.WorkerId;
+
+-- Cross join
+SELECT Worker.FirstName , Bonus.BonusAmount from Worker CROSS JOIN Bonus ON Bonus.Worker_ref_id=Worker.WorkerId;
+
+-- self join 
+SELECT w1.WorkerId , w2.FirstName from Worker as w1 INNER JOIN Worker as w2 ON w1.WorkerId=w2.WorkerId;
