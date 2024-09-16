@@ -1,0 +1,19 @@
+-- Queries on Joins 
+
+-- Enlist all the Worker's id , Names along with the Title alloted to them
+SELECT  DISTINCT Worker.WorkerId , Worker.FirstName , Title.WorkTitle from Worker LEFT JOIN Title ON Worker.WorkerId = Title.Worker_ref_id;
+
+-- Fetch out all the Worker Id and and their FirstName who have been working as Executive
+SELECT DISTINCT w1.Workerid , w1.FirstName , Title.WorkTitle from Worker as w1 JOIN Title ON w1.WorkerId=Title.Worker_ref_id WHERE Title.WorkTitle='Executive';
+ 
+-- Fetch out bonus allocated to each employee
+SELECT DISTINCT w1.WorkerId , Bonus.BonusAmount from Worker as w1 LEFT JOIN Bonus On W1.WorkerId=Bonus.Worker_ref_id;
+
+-- List out all the WorkTitle along with Worker Name and their respective allocated Department
+SELECT DISTINCT w1.FirstName , w1.Department , title.WorkTitle FROM Worker as w1 JOIN Title ON w1.WorkerId=title.Worker_ref_id;
+
+-- List out all the combinations possible for Worker name and title that can exist
+SELECT DISTINCT w1.FirstName , t1.WorkTitle FROM Worker as w1 CROSS JOIN title as t1 ;
+
+-- Join without using join keyword
+SELECT * from Worker , Title where Worker.WorkerId=Title.worker_ref_id;
