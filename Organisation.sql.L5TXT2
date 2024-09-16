@@ -1,0 +1,61 @@
+CREATE DATABASE ORG;
+use org;
+
+ create table Worker (
+	WorkerId INT NOT NULL PRIMARY KEY,
+    FirstName CHAR(40),
+    LastName CHAR(40),
+    Salary INT,
+    JoiningDate DATETIME,
+    Department CHAR(40)
+);
+
+ INSERT INTO WORKER
+     (WorkerId , FirstName , LastName , Salary , JoiningDate , Department ) values
+     (001,'Monika' , 'Arora' , 100000 , '14-02-20 09:00:00' , 'HR'),
+     (002, 'Niharika' , 'Verma' , 80000 , '14-06-11 09:00:00' , 'Admin'),
+     (003 , 'Vishal' , 'Singhal' , 300000 , '14-02-20 09:00:00' , 'Admin'),
+     (004 , 'Amitabh' , 'Singh' , 500000 , '14-06-11 09:00:00' , 'Admin'),
+     (005 , 'Vivek' , 'Bhati' , 500000 , '14-06-11 09:00:00' , 'HR'),
+     (006 , 'Vipul' , 'Dhiwan' , 200000 , '14-06-11 09:00:00' , 'Account'),
+     (007 , 'Satish' , 'Kumar' , 75000 , '14-01-20 09:00:00' , 'Account'),
+     (008 , 'Geetika' , 'Chauhan' , 90000 , '14-04-11 09:00:00' , 'Admin');
+     
+select * from worker;
+
+create table Bonus (
+     Worker_ref_id INT,
+     BonusAmount INT,
+     BonusDate DATETIME,
+     FOREIGN KEY (Worker_ref_id) references Worker(WorkerId)
+     ON DELETE CASCADE
+);
+
+ desc Bonus;
+ 
+  INSERT INTO Bonus (Worker_ref_id , BonusAmount , BonusDate) values
+    (002 , 3000 , '16-06-11'),
+	(003 , 4000 , '16-02-20'),
+    (001 , 4500 , '16-02-20'),
+	(002 , 3500 , '16-06-11');
+    
+select * from Bonus;
+
+ create table Title (
+ Worker_ref_id INT,
+ WorkTitle CHAR(40) ,
+ Affected_From DATETIME,
+ FOREIGN KEY (Worker_ref_id) references Worker(WorkerId) ON DELETE CASCADE
+);
+
+ insert into Title (Worker_ref_id,WorkTitle,Affected_From) values
+     (001 , 'Manager' , '2016-02-20 00:00:00'),
+     (002 , 'Executive' , '2016-06-11 00:00:00'),
+     (003 , 'Lead' , '2016-06-11 00:00:00'),
+     (004 , 'Asst. Manager' , '2016-06-11 00:00:00'),
+     (005 , 'Manager' , '2016-06-11 00:00:00'),
+     (006 , 'Lead' , '2016-06-11 00:00:00'),
+     (007 , 'Executive' , '2016-06-11 00:00:00'),
+     (008 , 'Executive' , '2015-06-11 00:00:00');
+     
+SELECT * FROM Title;
