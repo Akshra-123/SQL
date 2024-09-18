@@ -59,3 +59,35 @@ select * from Bonus;
      (008 , 'Executive' , '2015-06-11 00:00:00');
      
 SELECT * FROM Title;
+
+WITH CTE AS (
+    SELECT 
+        Worker_ref_id,
+        WorkTitle,
+        Affected_From,
+        ROW_NUMBER() OVER (PARTITION BY Worker_ref_id, WorkTitle, Affected_From ORDER BY Worker_ref_id) AS row_num
+    FROM Title
+)
+DELETE FROM Title
+WHERE Worker_ref_id IN (
+    SELECT Worker_ref_id FROM CTE WHERE row_num > 1
+)
+AND WorkTitle IN (
+    SELECT WorkTitle FROM CTE WHERE row_num > 1
+)
+AND Affected_From IN (
+    SELECT Affected_From FROM CTE WHERE row_num > 1
+);
+
+INSERT INTO Title (Worker_ref_id, WorkTitle, Affected_From) 
+VALUES
+    (1, 'Manager', '2016-02-20 00:00:00'),
+    (2, 'Executive', '2016-06-11 00:00:00'),
+    (3, 'Lead', '2016-06-11 00:00:00'),
+    (4, 'Asst. Manager', '2016-06-11 00:00:00'),
+    (5, 'Manager', '2016-06-11 00:00:00'),
+    (6, 'Lead', '2016-06-11 00:00:00'),
+    (7, 'Executive', '2016-06-11 00:00:00'),
+    (8, 'Executive', '2015-06-11 00:00:00');
+
+SELECT * FROM Title;
