@@ -71,3 +71,21 @@ SELECT Department , COUNT(WorkerId) FROM Worker GROUP BY DEPARTMENT ORDER BY COU
 
 -- 24 Write a SQL Query to print details of Workers who are also managers
 SELECT DISTINCT w.* , t.WorkTitle FROM Worker AS w RIGHT JOIN Title as t ON t.worker_ref_id=w.workerid WHERE t.WorkTitle='Manager'; 
+
+-- 25 Write a SQL Query to fetch number of Different titles in the Organisation
+SELECT DISTINCT WorkTitle , COUNT(WorkTitle) FROM Title GROUP BY Worktitle;
+
+-- 26 Write a SQL Query to show only odd rows from a table
+SELECT * FROM Worker WHERE MOD(WorkerId , 2)!=0;
+
+-- 27 Write a SQL Query to show only even rows from a table
+SELECT * FROM Worker WHERE MOD(WorkerId , 2)=0;
+
+-- 28 Write a SQL Query to clone a new table with other table
+CREATE TABLE WorkerClone LIKE Worker;
+INSERT INTO WorkerClone SELECT * FROM Worker;
+SELECT * FROM WorkerClone;
+
+-- 29 Write a SQL Query to fetch intersecting records of two tables
+-- Intersecting records are the ones that have same values in two tables
+SELECT w.* , b.* FROM Worker AS w INNER JOIN Bonus AS b ON w.WorkerId=b.Worker_ref_id; 
