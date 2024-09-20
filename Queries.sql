@@ -89,3 +89,24 @@ SELECT * FROM WorkerClone;
 -- 29 Write a SQL Query to fetch intersecting records of two tables
 -- Intersecting records are the ones that have same values in two tables
 SELECT w.* , b.* FROM Worker AS w INNER JOIN Bonus AS b ON w.WorkerId=b.Worker_ref_id; 
+
+-- 30 Write a SQL Query to show records from one table that other table does not have
+SELECT * FROM Worker WHERE WorkerId NOT IN (SELECT Worker_ref_id FROM Bonus);
+
+-- 31 Write a SQL Query to show current Date and Time
+SELECT curdate();
+SELECT now();
+
+-- 32 Write a SQL Query to show to top n (say 5) records of a table order by descending order
+SELECT * FROM Worker ORDER BY WorkerId DESC LIMIT 5 ;
+
+-- 33 Write a SQL Query to determine the nth (say n=5) highest salary from a table
+SELECT * FROM Worker ORDER BY Salary DESC LIMIT 4,1 ;
+
+-- 34 
+
+-- 35 Write a SQL Query to fetch the list of Employees with the same salary
+SELECT * FROM Worker w1 , Worker w2 WHERE w1.Salary=w2.Salary;
+
+-- 36 Write a SQL Query to show the second highest salary from a table
+SELECT WorkerId,Salary FROM Worker ORDER BY Salary DESC LIMIT 1,1; 
