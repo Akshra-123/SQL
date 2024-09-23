@@ -110,3 +110,33 @@ SELECT * FROM Worker w1 , Worker w2 WHERE w1.Salary=w2.Salary;
 
 -- 36 Write a SQL Query to show the second highest salary from a table
 SELECT WorkerId,Salary FROM Worker ORDER BY Salary DESC LIMIT 1,1; 
+
+-- 37 Write a SQL Query to show one row twice in results from a table
+SELECT * FROM Worker UNION ALL SELECT * FROM Worker ORDER BY WorkerId;
+
+-- 38 Write a SQL Query to list worker id who does not get bonus
+SELECT * FROM Worker WHERE WorkerId NOT IN (SELECT Worker_ref_id FROM Bonus);
+
+-- 39 Write a SQL Query to fetch the first 50% records from a table
+SELECT * FROM Worker WHERE WorkerId <= (SELECT COUNT(WorkerId)/2 FROM Worker);
+
+-- 40 Write a SQL Query to fetch the departments that have less than 4 people in it 
+SELECT Department , COUNT(Department) FROM Worker GROUP BY Department HAVING COUNT(Department)<4;
+
+-- 41 Write a SQL Query to show all departments along with the number of people in there
+SELECT Department , COUNT(Department) AS DepCount FROM Worker GROUP BY Department;
+
+-- 42 Write a SQL Query to show the last record from a Table
+SELECT * FROM Worker WHERE WorkerId=(SELECT max(WorkerId) FROM Worker);
+
+-- 43 Write a SQL Query to show the first row from a Table
+SELECT * FROM Worker WHERE WorkerId=(SELECT min(WorkerId) FROM Worker);
+
+-- 44 Write a SQL Query to fetch last five records from a table
+(SELECT * FROM Worker ORDER BY WorkerId DESC LIMIT 5) ORDER BY WorkerId;
+
+-- 45 Write a SQL Query to print name of Employees having highest salary in each department
+(SELECT MAX(Salary) , Department FROM Worker Group BY Department) ORDER BY MAX(Salary);
+
+-- 46 Write a SQL Query to fetch three max salaries from a table
+SELECT Salary , FirstName FROM Worker ORDER BY Salary DESC LIMIT 3; 
